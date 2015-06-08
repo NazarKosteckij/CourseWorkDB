@@ -1,8 +1,8 @@
 package com.sprhib.service;
 
-import java.util.List;
-
 import com.sprhib.model.Group;
+
+import java.util.List;
 
 public interface GroupService {
 	
@@ -10,6 +10,6 @@ public interface GroupService {
 	public void update(Group group);
 	public Group get(int id);
 	public void delete(int id);
-	//public List<Object> getAll();
+	public List<Group> getAll();
 
 }

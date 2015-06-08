@@ -9,27 +9,25 @@ import javax.persistence.Table;
  * Created by nkostets on 6/8/2015.
  */
 @Entity
-@Table(name="Groups")
-public class Group {
+@Table(name="days")
+public class Day {
     @Id
     @GeneratedValue
     private Integer id;
 
-    private String name;
+    private String names;
 
-    public Group(){}
-
-    public Group(String name, Integer id) {
-        this.name = name;
-        this.id = id;
+    public Day(String names) {
+        this.names = names;
+        this.id = 0;
     }
 
-    public String getName() {
-        return name;
+    public String getNames() {
+        return names;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNames(String names) {
+        this.names = names;
     }
 
     public Integer getId() {

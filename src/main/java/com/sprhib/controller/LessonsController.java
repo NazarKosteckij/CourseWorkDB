@@ -18,35 +18,33 @@ import com.sprhib.service.LessonService;
 public class LessonsController {
 	
 	@Autowired
-	private LessonService teamService;
+	private LessonService lessonsService;
 	
 	@ResponseBody
-	@RequestMapping(value="/all")
-	public List listOfTeams() {
-		List<Object> lessons = teamService.getAll();
-		System.out.print(lessons);
-		return lessons;
+	@RequestMapping(value="/all", method=RequestMethod.GET)
+	public List listOfLesson() {
+		return  lessonsService.getAll();
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/get/{id}", method=RequestMethod.GET)
 	public Lesson getLesson(@PathVariable Integer id) {
-		return teamService.get(id);
+		return lessonsService.get(id);
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public void addingTeam(@ModelAttribute Lesson team) {
-		teamService.add(team);
+	public void addingTeam(@ModelAttribute Lesson lesson) {
+		lessonsService.add(lesson);
 	}
 	
 	@RequestMapping(value="/edit/{id}", method=RequestMethod.POST)
-	public void edditingTeam(@ModelAttribute Lesson team, @PathVariable Integer id) {
-		teamService.update(team);
+	public void editingLesson(@ModelAttribute Lesson lesson, @PathVariable Integer id) {
+		lessonsService.update(lesson);
 	}
 	
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.POST)
-	public void deleteTeam(@PathVariable Integer id) {
-		teamService.delete(id);
+	public void deleteLesson(@PathVariable Integer id) {
+		lessonsService.delete(id);
 	}
 
 }

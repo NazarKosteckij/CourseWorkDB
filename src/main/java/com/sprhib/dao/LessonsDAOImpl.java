@@ -17,7 +17,7 @@ public class LessonsDAOImpl implements LessonsDAO {
 	private SessionFactory sessionFactory;
 	
 	private Session getCurrentSession() {
-		return sessionFactory.getCurrentSession();
+		return sessionFactory.openSession();
 	}
 
 	public void add(Object lesson) {

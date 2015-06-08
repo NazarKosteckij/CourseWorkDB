@@ -1,14 +1,13 @@
 package com.sprhib.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sprhib.dao.GroupDAO;
-import com.sprhib.dao.LessonsDAO;
 import com.sprhib.model.Group;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -32,6 +31,11 @@ public class GroupServiceImpl implements GroupService {
 
 	public void delete(int id) {
 		groupDAO.delete(id);
+	}
+
+	@Override
+	public List<Group> getAll() {
+		return groupDAO.getAll();
 	}
 
 }

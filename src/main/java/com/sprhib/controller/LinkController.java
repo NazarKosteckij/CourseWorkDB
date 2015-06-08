@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sprhib.model.Group;
+import com.sprhib.service.GroupService;
 import com.sprhib.service.LessonService;
 
 @Controller
@@ -17,9 +19,12 @@ public class LinkController {
 	@Autowired
 	LessonService lessons;
 	
-	
+	@Autowired
+	GroupService groupService;
+		
 	@RequestMapping(value="/")
 	public ModelAndView mainPage() {
+		groupService.add(new Group("name", 1));
 		return new ModelAndView("home");
 	}
 	
