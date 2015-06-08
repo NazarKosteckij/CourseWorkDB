@@ -1,9 +1,6 @@
 package com.sprhib.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by nkostets on 6/8/2015.
@@ -15,6 +12,7 @@ public class Day {
     @GeneratedValue
     private Integer id;
 
+    @Column(name = "name", unique = true)
     private String names;
 
     public Day(String names) {

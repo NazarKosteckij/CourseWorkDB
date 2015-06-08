@@ -3,6 +3,8 @@ package com.sprhib.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sprhib.dao.DaysDAO;
+import com.sprhib.model.Day;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,21 +20,48 @@ import com.sprhib.service.LessonService;
 public class LinkController {
 	@Autowired
 	LessonService lessons;
-	
+
 	@Autowired
 	GroupService groupService;
-		
+
+	@Autowired
+	DaysDAO daysDAO;
+
+
 	@RequestMapping(value="/")
 	public ModelAndView mainPage() {
-		groupService.add(new Group("name", 1));
 		return new ModelAndView("home");
 	}
-	
-	@RequestMapping(value="/index")
-	public ModelAndView indexPage() {
-		return new ModelAndView("home");
+
+	private void dataInitialization(){
+		Day monday = new Day("?????????");
+		Day tuesday = new Day("????????");
+		Day wednesday = new Day("??????");
+		Day thursday = new Day("??????");
+		Day friday = new Day("?'??????");
+		Day saturday = new Day("??????");
+
+		daysDAO.add(monday);
+		daysDAO.add(tuesday);
+		daysDAO.add(wednesday);
+		daysDAO.add(thursday);
+		daysDAO.add(friday);
+		daysDAO.add(saturday);
 	}
-	
+	@RequestMapping(value="/init")
+	public String indexPage() {
+		try {
+			dataInitialization();
+			groupService.add(new Group("?M-31", 0));
+		} catch (org.hibernate.exception.ConstraintViolationException ex){
+				System.out.print("Error duplicated name");
+		}
+		finally {
+
+		}
+		return "redirect:";
+	}
+
 	@ResponseBody
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public List addTeamPage2() {

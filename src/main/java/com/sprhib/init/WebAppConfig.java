@@ -5,6 +5,9 @@ import java.util.Properties;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import com.sprhib.dao.DaysDAO;
+import com.sprhib.model.Day;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

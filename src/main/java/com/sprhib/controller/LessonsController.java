@@ -33,8 +33,9 @@ public class LessonsController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public void addingTeam(@ModelAttribute Lesson lesson) {
-		lessonsService.add(lesson);
+	public void addingTeam(@ModelAttribute Lesson lesson, @PathVariable String name, @PathVariable Integer subject_id, @PathVariable Integer group_id,
+						   @PathVariable Integer room_id, @PathVariable Integer number, @PathVariable Integer day_id) {
+		lessonsService.add(new Lesson(name, subject_id, group_id, room_id, number, day_id));
 	}
 	
 	@RequestMapping(value="/edit/{id}", method=RequestMethod.POST)
