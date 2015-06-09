@@ -24,7 +24,7 @@ public class Lesson {
 	private Integer Room_id;
 	
 	private Integer number;
-	
+
 	private Integer day_id;
 	
 	

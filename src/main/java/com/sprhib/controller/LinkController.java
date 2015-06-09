@@ -34,12 +34,12 @@ public class LinkController {
 	}
 
 	private void dataInitialization(){
-		Day monday = new Day("��������");
-		Day tuesday = new Day("????????");
-		Day wednesday = new Day("??????");
-		Day thursday = new Day("??????�");
-		Day friday = new Day("?'??????");
-		Day saturday = new Day("??????");
+		Day monday = new Day("Понеділок");
+		Day tuesday = new Day("Вів");
+		Day wednesday = new Day("ср");
+		Day thursday = new Day("ЧТВП");
+		Day friday = new Day("?'??іва????");
+		Day saturday = new Day("??ааа????");
 
 		daysDAO.add(monday);
 		daysDAO.add(tuesday);
