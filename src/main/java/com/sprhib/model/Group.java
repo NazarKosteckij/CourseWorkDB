@@ -17,11 +17,14 @@ public class Group {
 
     private String name;
 
+    private Integer count_of_students;
+
     public Group(){}
 
-    public Group(String name, Integer id) {
+    public Group(String name, Integer count) {
         this.name = name;
-        this.id = id;
+        this.id = 0;
+        this.count_of_students = count;
     }
 
     public String getName() {
@@ -38,5 +41,13 @@ public class Group {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getCount_of_students() {
+        return count_of_students;
+    }
+
+    public void setCount_of_students(Integer count_of_students) {
+        this.count_of_students = count_of_students;
     }
 }
