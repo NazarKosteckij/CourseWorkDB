@@ -17,8 +17,9 @@
             // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
             $('.modal-trigger').leanModal();
             $('select').material_select();
-                $('.tooltipped').tooltip({delay: 50});
+            $('.tooltipped').tooltip({delay: 50});
             getData();
+            getGroups();
         });
 
         var Lessons = [];
@@ -50,10 +51,11 @@
                 success:function(data){
                     if(data.length==0)
                        console.log("no groups");
-                    Days = data;
-                    Days.forEach(function(group){
-                        $('select#groups').append("<option value='" + group.id + "'>" + group.names + "</option>");
+                    Groups = data;
+                    Groups.forEach(function(group){
+                        $('select#groups').append("<option value='" + group.id + "'>" + group.name + "</option>");
                     });
+                    $('select').material_select();
                 }
             });
         }
@@ -62,7 +64,7 @@
             $.post("/lessons/add", {
                 name: $('input#name').val(),
                 subject_id: 1,
-                group_id: 1,
+                group_id: $('select#groups').val(),
                 room_id: 1,
                 number: parseInt($('input#number').val()),
                 day_id: parseInt($('select#days').val())//$('#first_name').val()
@@ -86,10 +88,16 @@
                         getDays();
                         getData();
                     } else Lessons.forEach(function(lesson){
-                        $('.data tbody').append("<tr><td>" + lesson.id + "</td><td>" + Days[lesson.day_id].names  + "</td><td>"  + lesson.name + "</td><td>" + lesson.number + "</td><td>" + lesson.group_id + "</td><td>" + lesson.room_id
-                        + "<td><a  class='btn-floating red' onclick='deleteLesson(this.id)' id='" + lesson.day_id + "'>"
+                        $('.data tbody').append("<tr><td>" + lesson.id + "</td><td>" + Days[lesson.day_id].names  + "</td><td>"  + lesson.name + "</td><td>" + lesson.number + "</td><td>" + Groups[lesson.group_id-1].name + "</td><td>" + lesson.room_id
+                        + "<td class='row'><a  class='col tooltipped btn-floating red' onclick='deleteLesson(this.id)'  data-position='bottom' data-delay='50' data-tooltip='Видалити' id='" + lesson.day_id + "'>"
                         + "<i class='large mdi-editor-mode-edit'>" +
-                        "</i>  </a></td></tr> ");
+                        "</i></a>"
+                                + "<a  class='col tooltipped btn-floating green' onclick='Materialize.toast(\"Done\",1000)'  data-position='bottom' data-delay='50' data-tooltip='Редагувати' id='" + lesson.day_id + "'>"
+                                + "<i class='large mdi-editor-mode-add'>" +
+                                "</i></a>"
+                                +"</td></tr> ");
+
+                        $('.tooltipped').tooltip({delay: 50});
                     });
                 }
             });
@@ -170,12 +178,12 @@ ${message}<br/>
 
             <div class=" col s5">
                 <select class="initialized" id="groups">
-                    <option value="1">ПМ-31</option>
+
                 </select>
                 <label>Група</label>
             </div>
             <div class=" col s1">
-                <a  class='modal-trigger btn-floating red tooltipped'  data-position="bottom" data-delay="50" data-tooltip="Додати групу" onclick="$('#add').closeModal();setTimeout(function(){$('#addGroup').openModal()},1000);" id='addGroup' href="addGroup">
+                <a  class='modal-trigger btn-floating green tooltipped'  data-position="bottom" data-delay="50" data-tooltip="Додати групу" onclick="$('#add').closeModal();setTimeout(function(){$('#addGroup').openModal()},1000);" id='addGroup' href="addGroup">
                     <i class='large mdi-editor-mode-edit'></i>
                 </a>
             </div>
