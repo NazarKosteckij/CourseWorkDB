@@ -17,11 +17,20 @@
             // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
             $('.modal-trigger').leanModal();
             $('select').material_select();
+                $('.tooltipped').tooltip({delay: 50});
             getData();
         });
 
         var Lessons = [];
         var Days = [];
+        var Groups = [];
+
+        function addGroup(){
+            $.post("/groups/add", {
+                name:$('input#groupName').val(),
+                count_of_students: parseInt($('input#groupCount').val())
+            });
+        }
 
         function getDays(){
             $.ajax({
@@ -31,6 +40,20 @@
                    if(data.length!=0) Days = data
                     else Days = [{names:'error: initialize data'},{names:'error: initialize data'},{names:'error: initialize data'},{names:'error: initialize data'},{names:'error: initialize data'},{names:'error: initialize data'}];
 
+                }
+            });
+        }
+        function getGroups(){
+            $.ajax({
+                dataType: 'json',
+                url:"/groups/all",
+                success:function(data){
+                    if(data.length==0)
+                       console.log("no groups");
+                    Days = data;
+                    Days.forEach(function(group){
+                        $('select#groups').append("<option value='" + group.id + "'>" + group.names + "</option>");
+                    });
                 }
             });
         }
@@ -96,19 +119,42 @@ ${message}<br/>
 </div>
 
 
+<!-- Modal Add group -->
+<div id="addGroup" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Додати групу</h4>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="groupName" type="text" class="validate">
+                <label for="groupName">Назва групи</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="groupCount" type="text" class="validate" length="2">
+                <label for="groupCount">Кількість студентів</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Дані додано', 3000);addGroup()" href="#">Додати</a>
+    </div>
+</div>
+
 <!-- Modal Add data -->
 <div id="add" class="modal modal-fixed-footer">
     <div class="modal-content">
         <h4>Додати заннятя</h4>
         <div class="row">
             <div class="input-field col s6">
-                <input id="number" type="text" class="validate">
+                <input id="number" type="text" class="validate" length="2">
                 <label for="number">№ Пари</label>
             </div>
             <div class="input-field col s6">
                 <input id="name" type="text" class="validate">
                 <label for="name">Назва заняття</label>
             </div>
+        </div>
+        <div class="row">
             <div class=" col s6">
                 <select class="initialized" id="days">
                     <option value="1">Понеділок</option>
@@ -118,20 +164,20 @@ ${message}<br/>
                     <option value="5">П'ятниця</option>
                     <option value="6">Субота</option>
                 </select>
-                <label>Materialize Select</label>
+                <label>День</label>
 
             </div>
-            <div class=" col s6">
-                <select class="initialized" id="rooms">
-                    <option value="1">Понеділок</option>
-                    <option value="2">Вівторок</option>
-                    <option value="3">Середа</option>
-                    <option value="4">Четвер</option>
-                    <option value="5">П'ятниця</option>
-                    <option value="6">Субота</option>
-                </select>
-                <label>Materialize Select</label>
 
+            <div class=" col s5">
+                <select class="initialized" id="groups">
+                    <option value="1">ПМ-31</option>
+                </select>
+                <label>Група</label>
+            </div>
+            <div class=" col s1">
+                <a  class='modal-trigger btn-floating red tooltipped'  data-position="bottom" data-delay="50" data-tooltip="Додати групу" onclick="$('#add').closeModal();setTimeout(function(){$('#addGroup').openModal()},1000);" id='addGroup' href="addGroup">
+                    <i class='large mdi-editor-mode-edit'></i>
+                </a>
             </div>
         </div>
     </div>
