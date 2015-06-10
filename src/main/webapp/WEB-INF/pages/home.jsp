@@ -85,12 +85,13 @@ ${message}<br/>
                 <label for="name">Назва заняття</label>
             </div>
             <div class=" col s6">
-
-                    <select class="initialized">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
+                    <select class="initialized" id="days">
+                        <option value="1">Понеділок</option>
+                        <option value="2">Вівторок</option>
+                        <option value="3">Середа</option>
+                        <option value="4">Четвер</option>
+                        <option value="5">П'ятниця</option>
+                        <option value="6">Субота</option>
                     </select>
                     <label>Materialize Select</label>
 
