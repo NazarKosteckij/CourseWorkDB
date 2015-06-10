@@ -38,7 +38,7 @@ public class LinkController {
 		Day tuesday = new Day("Віврок");
 		Day wednesday = new Day("Середа");
 		Day thursday = new Day("Четвер");
-		Day friday = new Day("П'ятниця");
+		Day friday = new Day("\u00d0\u0178'\u00d1\ufffd\u00d1\u201a\u00d0\u00bd\u00d0\u00b8\u00d1\u2020\u00d1\ufffd");
 		Day saturday = new Day("Субота");
 
 		daysDAO.add(monday);

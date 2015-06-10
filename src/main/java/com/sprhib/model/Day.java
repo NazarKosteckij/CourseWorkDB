@@ -15,6 +15,9 @@ public class Day {
     @Column(name = "name", unique = true)
     private String names;
 
+    public Day() {
+    }
+
     public Day(String names) {
         this.names = names;
         this.id = 0;

@@ -40,7 +40,7 @@ public class DAOImpl implements DAO{
 	@SuppressWarnings("unchecked")
 	public List<Object> getAll(Class clazz) {
 		Query query = getCurrentSession()
-				.createSQLQuery("from "+clazz.getName())
+				.createSQLQuery("from "+clazz.getName()+"order by id")
 				.addEntity(clazz);
 		return query.list();
 	}

@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Created by Назар on 10.06.2015.
+ * Created by &#x41d;&#x430;&#x437;&#x430;&#x440; on 10.06.2015.
  */
 @Entity
 @Table(name = "room")

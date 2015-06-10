@@ -40,7 +40,8 @@ public class LessonsDAOImpl implements LessonsDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<Object> getAll() {
-		Query query = getCurrentSession().createQuery("from  Lesson");//.createSQLQuery("select * from lessons").addEntity(Lesson.class); //
+		Query query = getCurrentSession().createQuery("from  Lesson");//.createSQLQuery("select * from lessons").addEntity(Lesson.class);
+		// ("from  Lesson where day_id=1")
 				List<Object> result = query.list();
 		return result;
 	}

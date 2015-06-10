@@ -17,6 +17,7 @@ public class DayServiceImpl implements DayService {
 	@Autowired
 	private DaysDAO daysDAO;
 
+
 	public void add(Day day) {
 		daysDAO.add(day);
 	}

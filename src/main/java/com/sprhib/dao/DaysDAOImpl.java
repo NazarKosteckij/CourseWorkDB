@@ -42,7 +42,7 @@ public class DaysDAOImpl implements DaysDAO{
 	@SuppressWarnings("unchecked")
 	public List<Day> getAll() {
 		Query query = getCurrentSession()
-				.createSQLQuery("select * from days")
+				.createSQLQuery("select * from days ORDER BY id")
 				.addEntity(Day.class);
 		return query.list();
 	}

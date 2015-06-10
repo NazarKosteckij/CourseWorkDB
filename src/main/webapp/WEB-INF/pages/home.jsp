@@ -20,6 +20,21 @@
             getData();
         });
 
+        var Lessons = [];
+        var Days = [];
+
+        function getDays(){
+            $.ajax({
+                dataType: 'json',
+                url:"/days/all",
+                success:function(data){
+                   if(data.length!=0) Days = data
+                    else Days = [{names:'error: initialize data'},{names:'error: initialize data'},{names:'error: initialize data'},{names:'error: initialize data'},{names:'error: initialize data'},{names:'error: initialize data'}];
+
+                }
+            });
+        }
+
         function sendData(){
             $.post("/lessons/add", {
                 name: $('input#name').val(),
@@ -27,11 +42,15 @@
                 group_id: 1,
                 room_id: 1,
                 number: parseInt($('input#number').val()),
-                day_id: 1//$('#first_name').val()
+                day_id: parseInt($('select#days').val())//$('#first_name').val()
             });
             getData();
         }
-        var Lessons = [];
+        function deleteLesson(id){
+            if(id){
+                Materialize.toast('Deleted',2000);
+            }
+        }
         function getData(){
             $.ajax({
                 dataType: 'json',
@@ -40,8 +59,14 @@
                     Lessons = data;
                     console.log(data);
                     $('.data tbody').empty();
-                    Lessons.forEach(function(lesson){
-                        $('.data tbody').append("<tr><td>" + lesson.id + "</td><td>" + lesson.day_id  + "</td><td>"  + lesson.name + "</td><td>" + lesson.number + "</td><td>" + lesson.group_id + "</td><td>" + lesson.room_id + "</tr> ");
+                    if(Days.length==0){
+                        getDays();
+                        getData();
+                    } else Lessons.forEach(function(lesson){
+                        $('.data tbody').append("<tr><td>" + lesson.id + "</td><td>" + Days[lesson.day_id].names  + "</td><td>"  + lesson.name + "</td><td>" + lesson.number + "</td><td>" + lesson.group_id + "</td><td>" + lesson.room_id
+                        + "<td><a  class='btn-floating red' onclick='deleteLesson(this.id)' id='" + lesson.day_id + "'>"
+                        + "<i class='large mdi-editor-mode-edit'>" +
+                        "</i>  </a></td></tr> ");
                     });
                 }
             });
@@ -61,7 +86,7 @@ ${message}<br/>
     <div>
         <table class="striped data">
             <thead>
-                <td>Id</td><td>День</td><td>Назва</td><td>№ Пари</td><td>Група</td><td>Аудиторія</td>
+                <td>Id</td><td>День</td><td>Назва</td><td>№ Пари</td><td>Група</td><td>Аудиторія</td><td>Дія</td>
             </thead>
             <tbody>
 
@@ -85,15 +110,27 @@ ${message}<br/>
                 <label for="name">Назва заняття</label>
             </div>
             <div class=" col s6">
-                    <select class="initialized" id="days">
-                        <option value="1">Понеділок</option>
-                        <option value="2">Вівторок</option>
-                        <option value="3">Середа</option>
-                        <option value="4">Четвер</option>
-                        <option value="5">П'ятниця</option>
-                        <option value="6">Субота</option>
-                    </select>
-                    <label>Materialize Select</label>
+                <select class="initialized" id="days">
+                    <option value="1">Понеділок</option>
+                    <option value="2">Вівторок</option>
+                    <option value="3">Середа</option>
+                    <option value="4">Четвер</option>
+                    <option value="5">П'ятниця</option>
+                    <option value="6">Субота</option>
+                </select>
+                <label>Materialize Select</label>
+
+            </div>
+            <div class=" col s6">
+                <select class="initialized" id="rooms">
+                    <option value="1">Понеділок</option>
+                    <option value="2">Вівторок</option>
+                    <option value="3">Середа</option>
+                    <option value="4">Четвер</option>
+                    <option value="5">П'ятниця</option>
+                    <option value="6">Субота</option>
+                </select>
+                <label>Materialize Select</label>
 
             </div>
         </div>
