@@ -46,7 +46,7 @@ public class GroupDAOImpl implements GroupDAO{
 	@SuppressWarnings("unchecked")
 	public List<Group> getAll() {
 		Query query = getCurrentSession()
-				.createSQLQuery("select * from groups")
+				.createSQLQuery("select * from groups ORDER BY id")
 				.addEntity(Group.class);
 		return query.list();
 	}
