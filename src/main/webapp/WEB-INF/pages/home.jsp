@@ -26,7 +26,7 @@
         function getDays(){
             $.ajax({
                 dataType: 'json',
-                url:"/days/all",
+                url:"/databases/days/all",
                 success:function(data){
                    if(data.length!=0) Days = data
                     else Days = [{names:'error: initialize data'},{names:'error: initialize data'},{names:'error: initialize data'},{names:'error: initialize data'},{names:'error: initialize data'},{names:'error: initialize data'}];
@@ -36,7 +36,7 @@
         }
 
         function sendData(){
-            $.post("/lessons/add", {
+            $.post("/databases/lessons/add", {
                 name: $('input#name').val(),
                 subject_id: 1,
                 group_id: 1,
@@ -54,7 +54,7 @@
         function getData(){
             $.ajax({
                 dataType: 'json',
-                url:"/lessons/all",
+                url:"/databases/lessons/all",
                 success:function(data){
                     Lessons = data;
                     console.log(data);
